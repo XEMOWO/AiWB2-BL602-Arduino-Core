@@ -55,8 +55,8 @@
   </g>
   <g transform="translate(750 129)">
     <rect width="72" height="72" rx="18" fill="#17324d" stroke="#2c5580" stroke-width="1.5"/>
-    <path d="M36 10 L36 62" stroke="#a78bfa" stroke-width="4" stroke-linecap="round"/>
-    <path d="M36 20 L52 8 L52 64 L36 52" fill="none" stroke="#a78bfa" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Bluetooth rune (user-provided icon, recolored to accent) -->
+    <path d="M671.488 385.024L512.896 228.736c-12.672-12.544-34.176-3.456-34.176 14.336V439.168l-100.096-93.952c-1.408-1.408-3.712-1.28-5.12 0.128l-28.544 30.336c-1.408 1.408-1.28 3.712 0.128 5.12l133.632 125.44v18.816l-133.504 124.16c-1.408 1.408-1.536 3.712-0.128 5.12l28.416 30.464c1.408 1.408 3.712 1.536 5.12 0.128l100.224-93.184v198.912c0 17.792 21.504 26.88 34.176 14.336L671.488 648.96c7.936-7.808 7.936-20.736 0-28.672L581.12 531.328c-7.936-7.808-7.936-20.736 0-28.672l90.368-89.088c8.064-7.808 8.064-20.736 0-28.544z" fill="#a78bfa" transform="translate(-6.59 -7.44) scale(0.0852)"/>
   </g>
   <g transform="translate(834 129)">
     <rect width="72" height="72" rx="18" fill="#17324d" stroke="#2c5580" stroke-width="1.5"/>
