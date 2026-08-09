@@ -46,7 +46,7 @@
   </text>
 
   <!-- feature icon badges -->
-  <g transform="translate(634 129)">
+  <g transform="translate(666 129)">
     <rect width="72" height="72" rx="18" fill="#17324d" stroke="#2c5580" stroke-width="1.5"/>
     <circle cx="36" cy="44" r="4.5" fill="#38bdf8"/>
     <path d="M28 44 A8 8 0 0 1 44 44" fill="none" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
@@ -58,7 +58,7 @@
     <path d="M36 10 L36 62" stroke="#a78bfa" stroke-width="4" stroke-linecap="round"/>
     <path d="M36 20 L52 8 L52 64 L36 52" fill="none" stroke="#a78bfa" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
-  <g transform="translate(866 129)">
+  <g transform="translate(834 129)">
     <rect width="72" height="72" rx="18" fill="#17324d" stroke="#2c5580" stroke-width="1.5"/>
     <!-- chip: die + pin-1 marker + pins on all four sides -->
     <circle cx="26" cy="26" r="2.2" fill="#34d399"/>
@@ -69,7 +69,7 @@
     <path d="M50 26 H62 M50 33 H62 M50 40 H62 M50 47 H62" fill="none" stroke="#34d399" stroke-width="4" stroke-linecap="round"/>
   </g>
   <!-- dashed connector toward the chip icon -->
-  <path d="M 940 165 H 1002" stroke="#2c5580" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.8"/>
+  <path d="M 908 165 H 1002" stroke="#2c5580" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.8"/>
 
   <!-- spec chips -->
   <g font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600">
