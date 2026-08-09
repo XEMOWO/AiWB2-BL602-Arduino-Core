@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Ai-WB2-12F developer pin map">
+  <!-- title -->
+  <text x="40" y="48" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="800" fill="#0f172a">Ai-WB2-12F — Developer Pin Map</text>
+  <text x="40" y="76" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#64748b">Arduino-friendly GPIOs on the Bouffalo BL602 RISC-V SoC</text>
+
+  <!-- ===================== RECOMMENDED BLOCK ===================== -->
+  <rect x="40" y="104" width="576" height="248" rx="12" fill="#f8fafc" stroke="#d1fae5" stroke-width="2"/>
+  <rect x="40" y="104" width="576" height="34" rx="12" fill="#ecfdf5"/>
+  <rect x="40" y="122" width="576" height="16" fill="#ecfdf5"/>
+  <text x="52" y="126" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#047857">&#10003; RECOMMENDED — use these in your projects</text>
+
+  <g font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+    <!-- row 0 -->
+    <!-- GPIO3 -->
+    <rect x="52" y="148" width="176" height="58" rx="10" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.5"/>
+    <rect x="66" y="160" width="34" height="34" rx="8" fill="#10b981"/>
+    <text x="83" y="183" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">3</text>
+    <text x="112" y="177" font-size="12" font-weight="600" fill="#334155">I2C SDA · SPI SCK</text>
+    <text x="112" y="193" font-size="12" font-weight="600" fill="#334155">(SPI clock default)</text>
+    <!-- GPIO4 -->
+    <rect x="240" y="148" width="176" height="58" rx="10" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.5"/>
+    <rect x="254" y="160" width="34" height="34" rx="8" fill="#10b981"/>
+    <text x="271" y="183" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">4</text>
+    <text x="300" y="177" font-size="12" font-weight="600" fill="#334155">ADC 1 · SPI SS</text>
+    <text x="300" y="193" font-size="12" font-weight="600" fill="#334155">(chip-select default)</text>
+    <!-- GPIO5 -->
+    <rect x="428" y="148" width="176" height="58" rx="10" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.5"/>
+    <rect x="442" y="160" width="34" height="34" rx="8" fill="#10b981"/>
+    <text x="459" y="183" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">5</text>
+    <text x="488" y="177" font-size="12" font-weight="600" fill="#334155">ADC 4</text>
+    <text x="488" y="193" font-size="12" font-weight="600" fill="#94a3b8">analog input</text>
+
+    <!-- row 1 -->
+    <!-- GPIO7 -->
+    <rect x="52" y="218" width="176" height="58" rx="10" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.5"/>
+    <rect x="66" y="230" width="34" height="34" rx="8" fill="#10b981"/>
+    <text x="83" y="253" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">7</text>
+    <text x="112" y="247" font-size="12" font-weight="600" fill="#334155">UART0 RX</text>
+    <text x="112" y="263" font-size="12" font-weight="600" fill="#94a3b8">Serial console in</text>
+    <!-- GPIO11 -->
+    <rect x="240" y="218" width="176" height="58" rx="10" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.5"/>
+    <rect x="254" y="230" width="34" height="34" rx="8" fill="#10b981"/>
+    <text x="271" y="253" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">11</text>
+    <text x="300" y="247" font-size="12" font-weight="600" fill="#334155">ADC 10 · Serial1 TX</text>
+    <text x="300" y="263" font-size="12" font-weight="600" fill="#94a3b8">second UART out</text>
+    <!-- GPIO12 -->
+    <rect x="428" y="218" width="176" height="58" rx="10" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.5"/>
+    <rect x="442" y="230" width="34" height="34" rx="8" fill="#10b981"/>
+    <text x="459" y="253" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">12</text>
+    <text x="488" y="247" font-size="12" font-weight="600" fill="#334155">ADC 0 · I2C SCL</text>
+    <text x="488" y="263" font-size="12" font-weight="600" fill="#334155">SPI MOSI (default)</text>
+
+    <!-- row 2 -->
+    <!-- GPIO14 -->
+    <rect x="52" y="288" width="176" height="58" rx="10" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.5"/>
+    <rect x="66" y="300" width="34" height="34" rx="8" fill="#10b981"/>
+    <text x="83" y="323" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">14</text>
+    <text x="112" y="317" font-size="12" font-weight="600" fill="#334155">ADC 2 · PWM</text>
+    <text x="112" y="333" font-size="12" font-weight="600" fill="#334155">LED_BUILTIN</text>
+    <!-- GPIO16 -->
+    <rect x="240" y="288" width="176" height="58" rx="10" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.5"/>
+    <rect x="254" y="300" width="34" height="34" rx="8" fill="#10b981"/>
+    <text x="271" y="323" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">16</text>
+    <text x="300" y="317" font-size="12" font-weight="600" fill="#334155">UART0 TX</text>
+    <text x="300" y="333" font-size="12" font-weight="600" fill="#94a3b8">Serial console out</text>
+    <!-- GPIO17 -->
+    <rect x="428" y="288" width="176" height="58" rx="10" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.5"/>
+    <rect x="442" y="300" width="34" height="34" rx="8" fill="#10b981"/>
+    <text x="459" y="323" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">17</text>
+    <text x="488" y="317" font-size="12" font-weight="600" fill="#334155">SPI MISO · Serial1 RX</text>
+    <text x="488" y="333" font-size="12" font-weight="600" fill="#94a3b8">master-in slave-out</text>
+  </g>
+
+  <!-- ===================== BOOTSTRAP CHIP ===================== -->
+  <rect x="52" y="370" width="552" height="58" rx="10" fill="#fffbeb" stroke="#fde68a" stroke-width="1.5"/>
+  <rect x="66" y="382" width="34" height="34" rx="8" fill="#f59e0b"/>
+  <text x="83" y="405" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" fill="#ffffff">8</text>
+  <text x="112" y="399" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" fill="#b45309">BOOTSTRAP</text>
+  <text x="112" y="415" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#92400e">hold LOW while resetting to enter download mode (normally NC)</text>
+
+  <!-- ===================== AVOID BLOCK ===================== -->
+  <rect x="660" y="104" width="300" height="248" rx="12" fill="#f8fafc" stroke="#fecaca" stroke-width="2"/>
+  <rect x="660" y="104" width="300" height="34" rx="12" fill="#fef2f2"/>
+  <rect x="660" y="122" width="300" height="16" fill="#fef2f2"/>
+  <text x="672" y="126" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" fill="#b91c1c">&#10007; AVOID — shared with flash</text>
+
+  <g font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+    <!-- col0 -->
+    <rect x="672" y="148" width="132" height="48" rx="10" fill="#ffffff" stroke="#fecaca" stroke-width="1.5"/>
+    <rect x="686" y="156" width="32" height="32" rx="7" fill="#f43f5e"/>
+    <text x="702" y="178" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">0</text>
+    <text x="726" y="177" font-size="13" font-weight="600" fill="#64748b">flash</text>
+    <rect x="672" y="218" width="132" height="48" rx="10" fill="#ffffff" stroke="#fecaca" stroke-width="1.5"/>
+    <rect x="686" y="226" width="32" height="32" rx="7" fill="#f43f5e"/>
+    <text x="702" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">1</text>
+    <text x="726" y="247" font-size="13" font-weight="600" fill="#64748b">flash</text>
+    <rect x="672" y="288" width="132" height="48" rx="10" fill="#ffffff" stroke="#fecaca" stroke-width="1.5"/>
+    <rect x="686" y="296" width="32" height="32" rx="7" fill="#f43f5e"/>
+    <text x="702" y="318" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">2</text>
+    <text x="726" y="317" font-size="13" font-weight="600" fill="#64748b">flash</text>
+    <!-- col1 -->
+    <rect x="816" y="148" width="132" height="48" rx="10" fill="#ffffff" stroke="#fecaca" stroke-width="1.5"/>
+    <rect x="830" y="156" width="32" height="32" rx="7" fill="#f43f5e"/>
+    <text x="846" y="178" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">20</text>
+    <text x="870" y="177" font-size="13" font-weight="600" fill="#64748b">flash</text>
+    <rect x="816" y="218" width="132" height="48" rx="10" fill="#ffffff" stroke="#fecaca" stroke-width="1.5"/>
+    <rect x="830" y="226" width="32" height="32" rx="7" fill="#f43f5e"/>
+    <text x="846" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">21</text>
+    <text x="870" y="247" font-size="13" font-weight="600" fill="#64748b">flash</text>
+    <rect x="816" y="288" width="132" height="48" rx="10" fill="#ffffff" stroke="#fecaca" stroke-width="1.5"/>
+    <rect x="830" y="296" width="32" height="32" rx="7" fill="#f43f5e"/>
+    <text x="846" y="318" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">22</text>
+    <text x="870" y="317" font-size="13" font-weight="600" fill="#64748b">flash</text>
+  </g>
+
+  <!-- footnote -->
+  <text x="40" y="466" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" fill="#0f172a">Power &amp; control</text>
+  <text x="40" y="488" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#475569">3V3 · GND · 5V (in) · EN (reset) · BOOT (flash mode)</text>
+  <text x="40" y="514" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#475569">Default console = Serial (UART0) @ 115200 · TX = GPIO16 · RX = GPIO7</text>
+  <text x="40" y="536" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#475569">Full mapping in <tspan font-family="monospace" fill="#0369a1">variants/wb2-12f/pins_arduino.h</tspan></text>
+</svg>

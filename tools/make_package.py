@@ -49,6 +49,7 @@ TOP_FILES = [
     "platform.txt",
     "LICENSE",
     "README.md",
+    "README_zh-CN.md",
     "THIRD_PARTY_LICENSES.md",
 ]
 TOP_DIRS = ["cores", "libraries", "lib", "variants"]
