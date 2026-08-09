@@ -45,6 +45,26 @@
     ESP32-style Arduino API on the Bouffalo BL602 RISC-V SoC
   </text>
 
+  <!-- feature icon badges -->
+  <g transform="translate(624 141)">
+    <rect width="48" height="48" rx="14" fill="#17324d" stroke="#2c5580" stroke-width="1.5"/>
+    <circle cx="24" cy="37" r="3.5" fill="#38bdf8"/>
+    <path d="M16 37 A8 8 0 0 1 32 37" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+    <path d="M10 37 A14 14 0 0 1 38 37" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+    <path d="M4 37 A20 20 0 0 1 44 37" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(762 141)">
+    <rect width="48" height="48" rx="14" fill="#17324d" stroke="#2c5580" stroke-width="1.5"/>
+    <path d="M24 8 L24 40" stroke="#a78bfa" stroke-width="3" stroke-linecap="round"/>
+    <path d="M24 15 L36 5 L36 43 L24 33" fill="none" stroke="#a78bfa" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(900 141)">
+    <rect width="48" height="48" rx="14" fill="#17324d" stroke="#2c5580" stroke-width="1.5"/>
+    <path d="M27 6 L11 28 L21 28 L17 42 L35 18 L25 18 Z" fill="#34d399"/>
+  </g>
+  <!-- dashed connector toward the chip icon -->
+  <path d="M 950 165 H 1002" stroke="#2c5580" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.8"/>
+
   <!-- spec chips -->
   <g font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600">
     <rect x="70" y="272" width="182" height="34" rx="17" fill="#17324d" stroke="#2c5580" stroke-width="1.5"/>
