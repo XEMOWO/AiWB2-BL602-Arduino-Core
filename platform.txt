@@ -71,7 +71,7 @@ recipe.S.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.flags} {compile
 
 # core.a is inside --start-group: archives are scanned lazily, so a member is
 # only pulled in when a later group pass resolves the symbol that needs it.
-recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" {compiler.c.elf.flags} {compiler.c.elf.extra_flags} {object_files} -Wl,--start-group "{build.path}/core/core.a" {compiler.sdk.libs} -Wl,--end-group -o "{build.path}/{build.project_name}.elf"
+recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" {compiler.c.elf.flags} {compiler.c.elf.extra_flags} {object_files} -Wl,--start-group "{archive_file_path}" {compiler.sdk.libs} -Wl,--end-group -o "{build.path}/{build.project_name}.elf"
 
 # BL602 flashable image = the ELF minus the ROM/bugkiller sections.
 recipe.objcopy.hex.pattern="{compiler.path}{compiler.objcopy.cmd}" -S -O binary -R .romdata -R .rom -R .bugkiller_command -R .bugkiller "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.bin"
