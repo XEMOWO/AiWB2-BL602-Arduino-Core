@@ -12,12 +12,12 @@
         {
           "name": "Ai-Thinker Ai-WB2-12F (BL602)",
           "architecture": "wb2",
-          "version": "0.1.0",
+          "version": "0.1.1",
           "category": "WiFi/BLE",
-          "url": "https://github.com/XEMOWO/AiWB2-BL602-Arduino-Core/releases/download/v0.1.0/aiwb2-arduino-0.1.0.zip",
-          "archiveFileName": "aiwb2-arduino-0.1.0.zip",
-          "checksum": "SHA-256:84c57e61691788dead65b5881e58d33df2f196344ea1fdf537311c013c124a96",
-          "size": "32418669",
+          "url": "https://github.com/XEMOWO/AiWB2-BL602-Arduino-Core/releases/download/v0.1.1/aiwb2-arduino-0.1.1.zip",
+          "archiveFileName": "aiwb2-arduino-0.1.1.zip",
+          "checksum": "SHA-256:75fa9e03a8e0120adca6b828769d17d34c8bc58f3365468df4c8c88350221808",
+          "size": "117778354",
           "boards": [
             {
               "name": "Ai-Thinker Ai-WB2-12F"
