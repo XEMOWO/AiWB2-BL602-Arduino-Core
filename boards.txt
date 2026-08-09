@@ -1,0 +1,34 @@
+# boards.txt — Ai-Thinker Ai-WB2-12F (BL602)
+#
+# Native riscv build (see platform.txt). Upload via the bundled bflb_iot_tool.
+# Note: no inline comments after values — the IDE parser takes the whole line.
+
+menu.xtal=Xtal Frequency
+menu.boardsize=Flash Size
+
+##############################################################
+aithinker_wb2_12f.name=Ai-Thinker Ai-WB2-12F
+
+# Upload (bflb_iot_tool.exe, bundled in this package's tools/)
+aithinker_wb2_12f.upload.tool=bflb_iot_tool
+aithinker_wb2_12f.upload.protocol=bl602
+aithinker_wb2_12f.upload.speed=921600
+aithinker_wb2_12f.upload.maximum_size=2097152
+aithinker_wb2_12f.upload.maximum_data_size=276000
+
+# Build
+aithinker_wb2_12f.build.mcu=bl602
+aithinker_wb2_12f.build.core=arduino
+aithinker_wb2_12f.build.variant=wb2-12f
+aithinker_wb2_12f.build.board=Ai-WB2-12F
+aithinker_wb2_12f.build.xtal=40M
+
+aithinker_wb2_12f.menu.xtal.40M=Xtal 40 MHz
+aithinker_wb2_12f.menu.xtal.40M.build.xtal=40M
+aithinker_wb2_12f.menu.xtal.32M=Xtal 32 MHz
+aithinker_wb2_12f.menu.xtal.32M.build.xtal=32M
+
+aithinker_wb2_12f.menu.boardsize.2M=Flash 2MB
+aithinker_wb2_12f.menu.boardsize.2M.build.boardsize=2M
+aithinker_wb2_12f.menu.boardsize.4M=Flash 4MB
+aithinker_wb2_12f.menu.boardsize.4M.build.boardsize=4M
