@@ -2,7 +2,7 @@
   "packages": [
     {
       "name": "aithinker",
-      "maintainer": "Ai-Thinker (your name/team here)",
+      "maintainer": "Ai-Thinker (XEMOWO)",
       "websiteURL": "https://docs.ai-thinker.com/",
       "email": "",
       "help": {
@@ -14,7 +14,7 @@
           "architecture": "wb2",
           "version": "0.1.0",
           "category": "WiFi/BLE",
-          "url": "https://YOUR-HOST/packages/aiwb2-arduino-0.1.0.zip",
+          "url": "https://github.com/XEMOWO/AiWB2-BL602-Arduino-Core/releases/download/v0.1.0/aiwb2-arduino-0.1.0.zip",
           "archiveFileName": "aiwb2-arduino-0.1.0.zip",
           "checksum": "SHA-256:aef2b70f950203bb23bc1d02505869dc23e3adb20282895600a0ddebfaf9f12a",
           "size": "118354735",
