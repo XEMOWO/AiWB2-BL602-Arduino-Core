@@ -60,7 +60,12 @@
   </g>
   <g transform="translate(900 141)">
     <rect width="48" height="48" rx="14" fill="#17324d" stroke="#2c5580" stroke-width="1.5"/>
-    <path d="M27 6 L11 28 L21 28 L17 42 L35 18 L25 18 Z" fill="#34d399"/>
+    <!-- MCU: die + pins on all four sides -->
+    <rect x="17" y="17" width="14" height="14" rx="2" fill="none" stroke="#34d399" stroke-width="3"/>
+    <path d="M19 17 V9 M24 17 V9 M29 17 V9" fill="none" stroke="#34d399" stroke-width="3" stroke-linecap="round"/>
+    <path d="M19 31 V39 M24 31 V39 M29 31 V39" fill="none" stroke="#34d399" stroke-width="3" stroke-linecap="round"/>
+    <path d="M17 20 H9 M17 25 H9 M17 30 H9" fill="none" stroke="#34d399" stroke-width="3" stroke-linecap="round"/>
+    <path d="M31 20 H39 M31 25 H39 M31 30 H39" fill="none" stroke="#34d399" stroke-width="3" stroke-linecap="round"/>
   </g>
   <!-- dashed connector toward the chip icon -->
   <path d="M 950 165 H 1002" stroke="#2c5580" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.8"/>
