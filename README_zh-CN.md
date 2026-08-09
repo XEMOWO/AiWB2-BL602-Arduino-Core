@@ -5,7 +5,7 @@
 </div>
 
 <p align="center">
-  <img src="assets/banner.svg" width="100%" alt="Ai-WB2-12F Arduino Core — Bouffalo BL602 RISC-V SoC, 192 MHz, WiFi + BLE">
+  <img src="assets/banner-v2.svg" width="100%" alt="Ai-WB2-12F Arduino Core — Bouffalo BL602 RISC-V SoC, 192 MHz, WiFi + BLE">
 </p>
 
 <div align="center">
