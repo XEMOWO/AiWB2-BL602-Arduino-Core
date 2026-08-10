@@ -20,8 +20,11 @@ The package is assembled from an explicit whitelist (not a recursive copy of
 the repo) so generated dirs and the previous zip can never leak in.
 
 Run from the repo root:
-    python3 tools/make_package.py [sdk_root]
+    python3 tools/make_package.py [sdk_root] [version]
     sdk_root defaults to /root/wb2-12f-desktop-clock.
+    version  defaults to 0.1.0; only sets the output zip filename
+             (aiwb2-arduino-<version>.zip). Existing invocations with
+             0 or 1 argument behave exactly as before.
 """
 import hashlib
 import json
@@ -32,7 +35,7 @@ import tempfile
 import zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "0.1.0"
+VERSION = sys.argv[2] if len(sys.argv) > 2 else "0.1.0"
 OUT = os.path.join(ROOT, f"aiwb2-arduino-{VERSION}.zip")
 INDEX = os.path.join(ROOT, "package_aiwb2_index.json")
 SDK = sys.argv[1] if len(sys.argv) > 1 else "/root/wb2-12f-desktop-clock"
