@@ -16,8 +16,8 @@
           "category": "WiFi/BLE",
           "url": "https://github.com/XEMOWO/AiWB2-BL602-Arduino-Core/releases/download/v0.1.3/aiwb2-arduino-0.1.3.zip",
           "archiveFileName": "aiwb2-arduino-0.1.3.zip",
-          "checksum": "SHA-256:PENDING",
-          "size": "0",
+          "checksum": "SHA-256:574672017ff176714407089852d4406565fc089bb1128798127fbfd9ccc253cb",
+          "size": "119061095",
           "boards": [
             {
               "name": "Ai-Thinker Ai-WB2-12F"
