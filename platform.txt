@@ -1,0 +1,110 @@
+name=Ai-Thinker Ai-WB2-12F
+
+# platform.txt — Ai-Thinker Ai-WB2-12F (BL602) native Arduino build.
+#
+# Self-contained package: everything the compiler needs ships inside this
+# package, so installing it via Boards Manager works with zero extra setup.
+#   sdk.path        -> sdk-include/  (SDK C headers, tree structure preserved)
+#   toolchain.path  -> tools/riscv-msys  (Windows RISC-V gcc 10.2.0)
+#   lib/            -> prebuilt SDK static archives
+# make_package.py regenerates sdk-include/ and tools/riscv-msys/ from the
+# bl_iot_sdk checkout at package time, so {sdk.path} never points outside
+# the package. Do NOT hand-edit sdk.path to an absolute path — it breaks
+# Boards Manager installs.
+sdk.path={runtime.platform.path}/sdk-include
+
+# ---- toolchain ------------------------------------------------------------
+# toolchain.path MUST be a Windows-LOCAL copy of the RISC-V gcc: a gcc driver
+# spawned from a UNC path fails to CreateProcess its sub-tools (cc1/cc1plus/as),
+# so pointing compiler.path into the SDK's MSYS dir over UNC does not compile.
+# install_windows.ps1 provisions tools/riscv-msys from the SDK's
+# toolchain\riscv\MSYS (rv32 multilib only).
+toolchain.path={runtime.platform.path}/tools/riscv-msys
+compiler.path={toolchain.path}/bin/
+compiler.c.cmd=riscv64-unknown-elf-gcc
+compiler.cpp.cmd=riscv64-unknown-elf-g++
+compiler.c.elf.cmd=riscv64-unknown-elf-gcc
+compiler.ar.cmd=riscv64-unknown-elf-ar
+compiler.objcopy.cmd=riscv64-unknown-elf-objcopy
+compiler.size.cmd=riscv64-unknown-elf-size
+
+# ---- compile flags (mirrors make_scripts_riscv/project.mk for BL602) ------
+# This rv32 GCC was built with int32_t/uint32_t as long/long-unsigned (it is a
+# riscv64-elf compiler driving the rv32 multilib). The Xtensa ESP8266 defines
+# them as int/unsigned-int, and ESP8266 code (function signatures, %u/%d printf
+# of uint32_t, casts between uint32_t* and unsigned int*) relies on that
+# identity. compat_stdint_fix.h re-points the base-type macros (via -include,
+# which avoids the space inside "unsigned int" breaking flag tokenization).
+# All four types stay 32-bit, so the SDK's prebuilt libs (compiled with the
+# defaults) remain ABI-compatible — the change is in type spelling only.
+wb2.int32.fix=-include {runtime.platform.path}/cores/arduino/compat_stdint_fix.h
+compiler.c.flags=-std=gnu99 -Os -gdwarf -ffunction-sections -fdata-sections -fstrict-volatile-bitfields -fcommon -ffreestanding -fno-strict-aliasing -Wall -Wextra -Wno-unused-parameter -Wno-sign-compare -Wno-old-style-declaration -march=rv32imfc -mabi=ilp32f {wb2.int32.fix}
+
+# The SiFive GCC-Metal driver only auto-mounts the libstdc++ include dir for
+# the multilibs it was built with (rv32e* family); with -march=rv32imfc the C++
+# standard headers (functional/vector/list/...) are silently dropped from the
+# search path even though the toolchain ships them.  Add them back explicitly.
+# {toolchain.path} keeps this portable for both the Linux (WSL) and Windows
+# (riscv-msys) toolchains, which share the same layout.
+compiler.cpp.flags=-std=gnu++17 -Os -gdwarf -ffunction-sections -fdata-sections -fstrict-volatile-bitfields -fcommon -ffreestanding -fno-strict-aliasing -Wall -Wextra -Wno-unused-parameter -Wno-sign-compare -march=rv32imfc -mabi=ilp32f -nostdlib -g3 -fms-extensions -ffunction-sections -fdata-sections -Wall -Wchar-subscripts -Wformat -Winit-self -Wignored-qualifiers -Wswitch-default -Wunused -Wundef -Wno-literal-suffix -fno-rtti -fno-exceptions -fno-use-cxa-atexit -isystem {toolchain.path}/riscv64-unknown-elf/include/c++/10.2.0/riscv64-unknown-elf/rv32imfc/ilp32f -isystem {toolchain.path}/riscv64-unknown-elf/include/c++/10.2.0 -isystem {toolchain.path}/riscv64-unknown-elf/include/c++/10.2.0/riscv64-unknown-elf -isystem {toolchain.path}/riscv64-unknown-elf/include/c++/10.2.0/backward {wb2.int32.fix}
+
+compiler.warning_flags=
+compiler.warning_flags.none=
+compiler.warning_flags.default=
+compiler.warning_flags.more=
+compiler.warning_flags.all=
+
+# ---- preprocessor defines (SDK global CPPFLAGS, minus quoted version strings)
+compiler.sdk.defines=-DARDUINO=10819 -D _GNU_SOURCE -DARCH_RISCV -DconfigUSE_TICKLESS_IDLE=0 -DCFG_COMPONENT_BLOG_ENABLE=0 -DCFG_FREERTOS -DBL602 -DCONFIG_SET_TX_PWR -DCFG_BLE_ENABLE -DBFLB_BLE -DCFG_BLE -DCFG_SLEEP -DCFG_CON=1 -DCFG_BLE_TX_BUFF_DATA=1 -DCONFIG_BT_PERIPHERAL -DCONFIG_BT_BROADCASTER -DCONFIG_BT_CONN -DCONFIG_BT_HCI_VS_EVT_USER -DCONFIG_BT_ASSERT -DCONFIG_BT_GATT_DIS_PNP -DCONFIG_BT_GATT_DIS_SERIAL_NUMBER -DCONFIG_BT_GATT_DIS_FW_REV -DCONFIG_BT_GATT_DIS_HW_REV -DCONFIG_BT_GATT_DYNAMIC_DB -DCONFIG_BT_GATT_SERVICE_CHANGED -DCONFIG_BT_KEYS_OVERWRITE_OLDEST -DCONFIG_BT_KEYS_SAVE_AGING_COUNTER_ON_PAIRING -DCONFIG_BT_GAP_PERIPHERAL_PREF_PARAMS -DCONFIG_BT_BONDABLE -DCONFIG_BT_GATT_CLIENT -DCFG_BT_RESET -DCONFIG_BT_SMP -DCONFIG_BT_SIGNING -DCONFIG_BT_ECC -DCONFIG_BT_SETTINGS_CCC_LAZY_LOADING -DCONFIG_BT_SETTINGS_USE_PRINTK -DCFG_BLE_STACK_DBG_PRINT -DCONFIG_BLE_TP_SERVER -DCONFIG_BT_STACK_CLI -DLWIP_FEATURES=1 -DESP8266 -DCORE_MOCK=1
+
+# ---- SDK include dirs (generated from the SDK build's component lists) ----
+compiler.sdk.includes=-I{sdk.path}/components/fs/romfs -I{sdk.path}/components/fs/romfs/include -I{sdk.path}/components/fs/vfs -I{sdk.path}/components/fs/vfs/include -I{sdk.path}/components/fs/vfs/posix/include -I{sdk.path}/components/libc/newlibc -I{sdk.path}/components/libc/newlibc/include -I{sdk.path}/components/network/lwip -I{sdk.path}/components/network/lwip/bugkiller/include -I{sdk.path}/components/network/lwip/include -I{sdk.path}/components/network/lwip/lwip-port -I{sdk.path}/components/network/lwip/lwip-port/FreeRTOS -I{sdk.path}/components/network/lwip/lwip-port/arch -I{sdk.path}/components/network/lwip/lwip-port/config -I{sdk.path}/components/network/lwip/src/include -I{sdk.path}/components/network/lwip/src/include/compat/posix -I{sdk.path}/components/network/wifi/include -I{sdk.path}/components/network/wifi_manager/bl60x_wifi_driver/include -I{sdk.path}/components/network/wifi_hosal/include -I{sdk.path}/components/security/wpa_supplicant/include/bl_supplicant -I{sdk.path}/components/os/bl_os_adapter/bl_os_adapter/include -I{sdk.path}/components/os/bl_os_adapter/bl_os_adapter/include/bl_os_adapter -I{sdk.path}/components/os/bl_os_adapter/bl_os_adapter -I{sdk.path}/components/network/ble/blecontroller/ble_inc -I{sdk.path}/components/network/ble/blestack/src/port/include -I{sdk.path}/components/network/ble/blestack/src -I{sdk.path}/components/network/ble/blestack/src/common -I{sdk.path}/components/network/ble/blestack/src/common/include -I{sdk.path}/components/network/ble/blestack/src/common/include/zephyr -I{sdk.path}/components/network/ble/blestack/src/common/include/misc -I{sdk.path}/components/network/ble/blestack/src/common/include/toolchain -I{sdk.path}/components/network/ble/blestack/src/common/tinycrypt/include/tinycrypt -I{sdk.path}/components/network/ble/blestack/src/hci_onchip -I{sdk.path}/components/network/ble/blestack/src/bl_hci_wrapper -I{sdk.path}/components/network/ble/blestack/src/host -I{sdk.path}/components/network/ble/blestack/src/include/bluetooth -I{sdk.path}/components/network/ble/blestack/src/include/drivers/bluetooth -I{sdk.path}/components/network/ble/blestack/src/profiles -I{sdk.path}/components/network/ble/blestack/src/cli_cmds -I{sdk.path}/components/network/ble/blestack/src/services -I{sdk.path}/components/platform/hosal -I{sdk.path}/components/platform/hosal/bl602_hal -I{sdk.path}/components/platform/hosal/include -I{sdk.path}/components/platform/hosal/platform_hal -I{sdk.path}/components/platform/hosal/sec_common -I{sdk.path}/components/platform/soc/bl602/bl602 -I{sdk.path}/components/platform/soc/bl602/bl602/include -I{sdk.path}/components/platform/soc/bl602/bl602_std -I{sdk.path}/components/platform/soc/bl602/bl602_std/bl602_std/Common/cipher_suite/inc -I{sdk.path}/components/platform/soc/bl602/bl602_std/bl602_std/Common/partition -I{sdk.path}/components/platform/soc/bl602/bl602_std/bl602_std/Common/platform_print -I{sdk.path}/components/platform/soc/bl602/bl602_std/bl602_std/Common/ring_buffer -I{sdk.path}/components/platform/soc/bl602/bl602_std/bl602_std/Common/soft_crc -I{sdk.path}/components/platform/soc/bl602/bl602_std/bl602_std/Common/xz -I{sdk.path}/components/platform/soc/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals -I{sdk.path}/components/platform/soc/bl602/bl602_std/bl602_std/Include -I{sdk.path}/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Core/Include -I{sdk.path}/components/platform/soc/bl602/bl602_std/bl602_std/RISCV/Device/Bouffalo/BL602/Startup -I{sdk.path}/components/platform/soc/bl602/bl602_std/bl602_std/StdDriver/Inc -I{sdk.path}/components/platform/soc/bl602/bl602_std/include -I{sdk.path}/components/platform/soc/bl602/freertos_riscv_ram -I{sdk.path}/components/platform/soc/bl602/freertos_riscv_ram/config -I{sdk.path}/components/platform/soc/bl602/freertos_riscv_ram/include -I{sdk.path}/components/platform/soc/bl602/freertos_riscv_ram/panic -I{sdk.path}/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V -I{sdk.path}/components/platform/soc/bl602/freertos_riscv_ram/portable/GCC/RISC-V/chip_specific_extensions/RV32F_float_abi_single -I{sdk.path}/components/security/mbedtls_lts -I{sdk.path}/components/security/mbedtls_lts/include -I{sdk.path}/components/security/mbedtls_lts/mbedtls/include -I{sdk.path}/components/security/mbedtls_lts/port -I{sdk.path}/components/stage/blfdt -I{sdk.path}/components/stage/blfdt/inc -I{sdk.path}/components/stage/blfdt/include -I{sdk.path}/components/stage/blog -I{sdk.path}/components/stage/blog/include -I{sdk.path}/components/stage/blog_testc -I{sdk.path}/components/stage/blog_testc/include -I{sdk.path}/components/stage/cli -I{sdk.path}/components/stage/cli/cli/include -I{sdk.path}/components/stage/cli/include -I{sdk.path}/components/stage/yloop -I{sdk.path}/components/stage/yloop/include -I{sdk.path}/components/sys/blmtd -I{sdk.path}/components/sys/blmtd/include -I{sdk.path}/components/sys/bloop/bloop -I{sdk.path}/components/sys/bloop/bloop/include -I{sdk.path}/components/sys/bloop/looprt -I{sdk.path}/components/sys/bloop/looprt/include -I{sdk.path}/components/sys/bloop/loopset -I{sdk.path}/components/sys/bloop/loopset/include -I{sdk.path}/components/sys/bltime -I{sdk.path}/components/sys/bltime/include -I{sdk.path}/components/utils -I{sdk.path}/components/utils/include
+
+# ---- link (matches the SDK: gcc driver + --start-group over all archives) --
+compiler.c.elf.flags=-march=rv32imfc -mabi=ilp32f -nostartfiles -Wl,--gc-sections -Wl,-static -Wl,-EL
+compiler.c.elf.extra_flags=
+
+# Prebuilt SDK archives shipped in this package (lib/). libstdc++ from the
+# toolchain (the rv32imfc multilib has one) provides the non-inline std::list /
+# std::function runtime symbols (_List_node_base::_M_hook etc). Same reasoning
+# as compiler.cpp.flags above: the driver won't auto-mount it for rv32imfc.
+compiler.sdk.libs=-L{runtime.platform.path}/lib -L{sdk.path}/components/platform/soc/bl602/bl602/evb/ld -L{toolchain.path}/riscv64-unknown-elf/lib/rv32imfc/ilp32f -T flash_rom.ld -lbl602 -lbl602_std -lblfdt -lblmtd -lblog -lblog_testc -lbloop -lbltime -lcli -lfreertos_riscv_ram -lhosal -llooprt -lloopset -llwip -llwip_dhcpd -lmbedtls_lts -lnewlibc -lromfs -lutils -lvfs -lyloop -lwifi -lwifi_manager -lwpa_supplicant -lwifi_hosal -lblestack -lblecontroller_602_std -lbl_os_adapter -lblcrypto_suite -lrfparam_adapter_tmp -lnetutils -lsntp -ldns_server -leasyflash4 -lstdc++ -lm
+
+# ---- archive / size --------------------------------------------------------
+compiler.ar.flags=cru
+recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} "{archive_file_path}" "{object_file}"
+
+recipe.size.pattern="{compiler.path}{compiler.size.cmd}" -A "{build.path}/{build.project_name}.elf"
+recipe.size.regex=^(?:\.text|\.text\..*|\.rodata|\.rodata\..*|\.data|\.sdata2|\.sdata2\..*|\.sdata|\.sdata\..*)\s+([0-9]+).*
+recipe.size.regex.data=^(?:\.data|\.sdata|\.sdata2|\.sdata2\..*)\s+([0-9]+).*
+recipe.size.regex.eeprom=^(?:\.eeprom)\s+([0-9]+).*
+recipe.size.regex.flash=^(?:\.text|\.text\..*|\.rodata|\.rodata\..*|\.data|\.sdata2|\.sdata2\..*|\.sdata|\.sdata\..*)\s+([0-9]+).*
+
+# ---- recipes ---------------------------------------------------------------
+recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.flags} {compiler.sdk.defines} {compiler.sdk.includes} {includes} {compiler.warning_flags} -c "{source_file}" -o "{object_file}"
+
+recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} {compiler.sdk.defines} {compiler.sdk.includes} {includes} {compiler.warning_flags} -c "{source_file}" -o "{object_file}"
+
+recipe.S.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.flags} {compiler.sdk.defines} {compiler.sdk.includes} {includes} {compiler.warning_flags} -c "{source_file}" -o "{object_file}"
+
+# core.a is inside --start-group: archives are scanned lazily, so a member is
+# only pulled in when a later group pass resolves the symbol that needs it.
+# Must reference the archive via {archive_file_path}, NOT {build.path}/core/core.a:
+# when arduino-cli reuses the precompiled-core cache ("Using precompiled core"),
+# the cached core.a is never copied into the sketch build dir, so the hard-coded
+# build path does not exist -> "core/core.a: No such file or directory" at link.
+# {archive_file_path} resolves to the real core.a in both fresh and cached paths.
+recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" {compiler.c.elf.flags} {compiler.c.elf.extra_flags} {object_files} -Wl,--start-group "{archive_file_path}" {compiler.sdk.libs} -Wl,--end-group -o "{build.path}/{build.project_name}.elf"
+
+# BL602 flashable image = the ELF minus the ROM/bugkiller sections.
+recipe.objcopy.hex.pattern="{compiler.path}{compiler.objcopy.cmd}" -S -O binary -R .romdata -R .rom -R .bugkiller_command -R .bugkiller "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.bin"
+
+# ---- upload ----------------------------------------------------------------
+tools.bflb_iot_tool.cmd=bflb_iot_tool
+tools.bflb_iot_tool.path={runtime.platform.path}/tools
+tools.bflb_iot_tool.upload.params.verbose=
+tools.bflb_iot_tool.upload.params.quiet=
+# BL602 has no auto-reset circuit. bflb_iot_tool opens the port and handshakes
+# immediately (5s window); the chip must ALREADY be in download mode (hold BOOT,
+# tap RST, release BOOT) before the tool runs. Do BOOT+RST first, then Upload.
+tools.bflb_iot_tool.upload.pattern="{runtime.platform.path}/tools/bflb_iot_tool.exe" --chipname=BL602 --port={serial.port} --baudrate={upload.speed} --pt={runtime.platform.path}/tools/partition_cfg_2M.toml --dts={runtime.platform.path}/tools/04-bl_factory_params_IoTKitA_40M-20220625.dts --boot2={runtime.platform.path}/tools/boot2_iap_release.bin --firmware={build.path}/{build.project_name}.bin

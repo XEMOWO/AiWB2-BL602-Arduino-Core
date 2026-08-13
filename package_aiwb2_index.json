@@ -1,0 +1,32 @@
+{
+  "packages": [
+    {
+      "name": "aithinker",
+      "maintainer": "Ai-Thinker (XEMOWO)",
+      "websiteURL": "https://docs.ai-thinker.com/",
+      "email": "",
+      "help": {
+        "online": "https://docs.ai-thinker.com/"
+      },
+      "platforms": [
+        {
+          "name": "Ai-Thinker Ai-WB2-12F (BL602)",
+          "architecture": "wb2",
+          "version": "0.1.3",
+          "category": "WiFi/BLE",
+          "url": "https://github.com/XEMOWO/AiWB2-BL602-Arduino-Core/releases/download/v0.1.3/aiwb2-arduino-0.1.3.zip",
+          "archiveFileName": "aiwb2-arduino-0.1.3.zip",
+          "checksum": "SHA-256:PENDING",
+          "size": "0",
+          "boards": [
+            {
+              "name": "Ai-Thinker Ai-WB2-12F"
+            }
+          ],
+          "toolsDependencies": []
+        }
+      ],
+      "tools": []
+    }
+  ]
+}
