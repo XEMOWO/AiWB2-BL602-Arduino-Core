@@ -614,11 +614,28 @@ extern "C" void enableWiFiAtBootTime (void)
  * the name, so it must point at persistent storage — hence the static String.
  * The SDK's default STA hostname is "espressif" (ESP8266's default).
  */
-static String s_hostname = "espressif";
+static String s_hostname;
+
+/* Effective hostname, with the SDK default materialized on first use.
+ *
+ * This must stay lazy: a file-scope `static String s_hostname = "espressif"`
+ * allocates the buffer in .init_array, which BL602 runs BEFORE
+ * vPortDefineHeapRegions() (newlib malloc == pvPortMalloc here, and a malloc
+ * before the FreeRTOS heap exists hits the SDK's ecall trap -> reset). A plain
+ * default-constructed String performs no allocation, so the constructor is
+ * harmless; only the first read/write (all post-boot) touches the heap.
+ */
+static const char* s_hostname_effective()
+{
+    if (s_hostname.length() == 0) {
+        s_hostname = "espressif";
+    }
+    return s_hostname.c_str();
+}
 
 String ESP8266WiFiGenericClass::hostname()
 {
-    return String(getHostname());
+    return String(s_hostname_effective());
 }
 
 bool ESP8266WiFiGenericClass::hostname(const char* aHostname)
@@ -636,13 +653,13 @@ bool ESP8266WiFiGenericClass::hostname(const char* aHostname)
 
 const char* ESP8266WiFiGenericClass::getHostname()
 {
-    return s_hostname.c_str();
+    return s_hostname_effective();
 }
 
 /* non-OS-SDK: CallSDKFunctions and a few libraries read this directly. */
 extern "C" const char* wifi_station_get_hostname(void)
 {
-    return s_hostname.c_str();
+    return s_hostname_effective();
 }
 
 /* ---- non-OS-SDK wifi control (declared in cores/arduino/user_interface.h)
