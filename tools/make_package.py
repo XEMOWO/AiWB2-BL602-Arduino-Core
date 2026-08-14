@@ -122,6 +122,16 @@ def make_riscv_msys(dst):
         _cp(os.path.join(TC, "bin", f), os.path.join(b, f))
     for f in TC_LIBEXEC:
         _cp(os.path.join(TC, "libexec/gcc", TCV, f), os.path.join(le, f))
+    # cc1/cc1plus/collect2 load libwinpthread-1.dll (and the other MinGW shared
+    # libs) from THEIR OWN directory — Windows DLL search checks the exe's dir,
+    # then system dirs, then PATH. bin/ is never on an end user's PATH, so
+    # cc1plus fails to start on a clean machine (g++ -E -> exit 1, no stderr,
+    # "找不到 libwinpthread-1.dll"). Ship the DLLs next to the compiler frontend
+    # so any machine / any PATH works. This was the root cause of the universal
+    # "exit status 1" compile failure reported by end users (v0.1.3).
+    for f in TC_BIN:
+        if f.endswith(".dll"):
+            _cp(os.path.join(TC, "bin", f), os.path.join(le, f))
     for f in TC_LIB_GCC:
         _cp(os.path.join(TC, "lib/gcc", TCV, f), os.path.join(lg, f))
     for f in ["include", "include-fixed"]:
