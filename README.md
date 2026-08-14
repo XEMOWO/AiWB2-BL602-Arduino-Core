@@ -52,21 +52,46 @@ Write **ESP32-style sketches**, install the core in **one click** from the Board
 
 ## 🛠️ Installation
 
-> [!IMPORTANT]
-> Add this URL in Arduino IDE 2.x: **File → Preferences → Additional boards manager URLs**
+### Option 1 — Boards Manager, one-click (recommended)
+
+**1. Add the boards manager URL**
+
+**File → Preferences → Additional boards manager URLs** (separate multiple URLs with commas):
 
 ```
-https://github.com/XEMOWO/AiWB2-BL602-Arduino-Core/releases/download/v0.1.0/package_aiwb2_index.json
+https://raw.githubusercontent.com/XEMOWO/AiWB2-BL602-Arduino-Core/v0.1.3/package_aiwb2_index.json
 ```
 
-Then:
+**2. Install the board**
 
-1. **Tools → Board → Boards Manager** → search **Ai-WB2** → **Install**.
-2. Select **Tools → Board → Ai-Thinker Ai-WB2-12F**.
-3. Connect the board (USB-UART on `GPIO16` TX / `GPIO7` RX) and hit **Upload**.
+**Tools → Board → Boards Manager** → search **Ai-WB2** (or **Ai-Thinker**) → **Install**.
+
+**3. Select the board and upload**
+
+Select **Tools → Board → Ai-Thinker Ai-WB2-12F**; USB-UART on `GPIO16` TX /
+`GPIO7` RX, then hit **Upload**.
+
+> [!NOTE]
+> The package is self-contained — RISC-V toolchain, SDK headers and the flasher
+> are all inside (~119 MB) — so it downloads and installs in one step, no separate
+> SDK or toolchain needed. First compile is slow (it builds the whole core); if
+> the board does not show up after installing, restart the IDE.
+
+### Option 2 — Manual install (offline / intranet)
+
+No GitHub required: hand `aiwb2-arduino-0.1.3.zip` to the user, unzip it to get
+the `aiwb2-arduino/` folder, and copy that folder to:
+
+```
+Windows:  %LOCALAPPDATA%\Arduino15\packages\aithinker\hardware\wb2\0.1.3
+macOS:    ~/Library/Arduino15/packages/aithinker/hardware/wb2/0.1.3
+```
+
+Restart the Arduino IDE. The toolchain ships in the package, so nothing extra is needed.
 
 > [!TIP]
-> On **Windows** everything is bundled — RISC-V toolchain, SDK headers and the flasher — so the install works fully offline. On macOS/Linux the Arduino layer is cross-platform; supply your own native `riscv64-unknown-elf-*` toolchain and it works the same.
+> `install_windows.ps1` is the legacy dev/debug installer (it repoints `sdk.path`
+> at an external SDK) — **end users don't need it**; Boards Manager is simpler.
 
 ## 💡 First sketch
 
