@@ -52,7 +52,23 @@ Write **ESP32-style sketches**, install the core in **one click** from the Board
 
 ## 🛠️ Installation
 
-### Option 1 — Boards Manager, one-click (recommended)
+### Option 1 — Windows one-click installer (recommended)
+
+Download **`AiWB2-0.1.3-Setup.exe`** from the
+[v0.1.3 release](https://github.com/XEMOWO/AiWB2-BL602-Arduino-Core/releases/tag/v0.1.3),
+double-click it, and it installs the board package (RISC-V toolchain, SDK
+headers and the flasher all included, ~126 MB) straight into your Arduino15
+folder. No GitHub, no toolchain setup, nothing to configure.
+
+Then restart the IDE and select **Tools → Board → Ai-Thinker Ai-WB2-12F**;
+USB-UART on `GPIO16` TX / `GPIO7` RX, and hit **Upload**.
+
+> [!NOTE]
+> The installer is fully self-contained and works offline. Windows only.
+> First compile is slow (it builds the whole core); if the board does not show
+> up after installing, restart the IDE.
+
+### Option 2 — Boards Manager, one-click
 
 **1. Add the boards manager URL**
 
@@ -73,11 +89,11 @@ Select **Tools → Board → Ai-Thinker Ai-WB2-12F**; USB-UART on `GPIO16` TX /
 
 > [!NOTE]
 > The package is self-contained — RISC-V toolchain, SDK headers and the flasher
-> are all inside (~119 MB) — so it downloads and installs in one step, no separate
+> are all inside (~126 MB) — so it downloads and installs in one step, no separate
 > SDK or toolchain needed. First compile is slow (it builds the whole core); if
 > the board does not show up after installing, restart the IDE.
 
-### Option 2 — Manual install (offline / intranet)
+### Option 3 — Manual install (offline / intranet)
 
 No GitHub required: hand `aiwb2-arduino-0.1.3.zip` to the user, unzip it to get
 the `aiwb2-arduino/` folder, and copy that folder to:

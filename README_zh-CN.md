@@ -52,7 +52,21 @@
 
 ## 🛠️ 安装
 
-### 方式一：开发板管理器一键安装（推荐）
+### 方式一：Windows 一键安装包（推荐）
+
+从 [v0.1.3 发布页](https://github.com/XEMOWO/AiWB2-BL602-Arduino-Core/releases/tag/v0.1.3)
+下载 **`AiWB2-0.1.3-Setup.exe`**，双击运行即可自动把开发板包（RISC-V 工具链、
+SDK 头文件、烧录工具全含在内，约 126 MB）装进 Arduino15 目录。无需 GitHub、
+无需装工具链、无需任何配置。
+
+重启 IDE 后选择 **工具 → 开发板 → Ai-Thinker Ai-WB2-12F**；USB-UART 接
+`GPIO16` TX / `GPIO7` RX，点 **上传**。
+
+> [!NOTE]
+> 安装包完全自包含、可离线安装。仅支持 Windows。
+> 首次编译较慢（要编译整套 core）；若安装后看不到开发板，重启一下 IDE。
+
+### 方式二：开发板管理器一键安装
 
 **1. 添加附加开发板管理器网址**
 
@@ -72,11 +86,11 @@ https://raw.githubusercontent.com/XEMOWO/AiWB2-BL602-Arduino-Core/v0.1.3/package
 `GPIO7` RX，点 **上传**。
 
 > [!NOTE]
-> 包已自包含（RISC-V 工具链、SDK 头文件、烧录工具全在包内，约 119 MB），
+> 包已自包含（RISC-V 工具链、SDK 头文件、烧录工具全在包内，约 126 MB），
 > 安装过程自动下载解压，**装完即用**，无需单独装 SDK / 工具链。
 > 首次编译较慢（要编译整套 core）；若安装后看不到开发板，重启一下 IDE。
 
-### 方式二：手动安装（离线 / 内网）
+### 方式三：手动安装（离线 / 内网）
 
 无需 GitHub：把 `aiwb2-arduino-0.1.3.zip` 发给用户，解压得到 `aiwb2-arduino/`
 目录，整目录拷到：
